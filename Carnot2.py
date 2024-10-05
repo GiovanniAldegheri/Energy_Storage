@@ -80,6 +80,10 @@ def calculate_mass_flow_rate(discharging_loss_Wh, final_temperature):
 
     # CALCULATE MASS FLOW RATE (kg/s)
     mass_flow_rate = heat_transfer_rate / (specific_heat_capacity * delta_T)
+
+    if final_temperature == 70:
+        q_heating = mass_flow_rate * specific_heat_capacity * 30 * storage_duration * 24
+        print(f"Energy Used for Heating (in MWh): {q_heating/1_000_000:.2f}")
     
     return mass_flow_rate
 
@@ -103,7 +107,7 @@ def run_calculations(cold_side):
     print(f"Total Storage Mass (in kg): {storage_mass:.2f}")
     print(f"Storage Footprint (in m²): {footprint:.2f}")
     print(f"Energy Lost During Charging (in MWh): {charging_loss_Wh/1_000_000:.2f}")
-    print(f"Energy Lost During Discharging (in MWh): {discharging_loss_Wh/1_000_000:.2f}")
+    print(f"Energy Lost During Discharging (in kWh): {discharging_loss_Wh/1_000:.2f}")
     print(f"Energy Lost During a Cycle (in MWh): {energy_lost_kWh/1_000:.2f}")
     print(f"Required Mass Flow Rate (in kg/s): {mass_flow_rate:.4f}")
 
